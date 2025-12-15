@@ -62,6 +62,7 @@ public class ProductsController
     }
 
     @PostMapping()
+    @ResponseStatus(HttpStatus.CREATED) // Not using thia annotation, right now adding this annotation --- Bug 1
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public Product addProduct(@RequestBody Product product)
     {
@@ -81,7 +82,10 @@ public class ProductsController
     {
         try
         {
-            productDao.create(product);
+            // bug is here, it should be updateProduct
+           // productDao.create(product);
+
+            productDao.update(id, product);
         }
         catch(Exception ex)
         {
