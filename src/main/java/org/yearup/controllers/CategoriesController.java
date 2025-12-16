@@ -34,35 +34,45 @@ public class CategoriesController {
 
     // add the appropriate annotation for a get action
     @GetMapping
-    @PreAuthorize("permitAll()")
     public List<Category> getAll() {
         // find and return all categories
-        return categoryDao.getAllCategories();
-    }
+        //try {
 
+            return categoryDao.getAllCategories();
+        /*} catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Ops....server error");
+        }*/
+    }
     // add the appropriate annotation for a get action
     @GetMapping("{id}")
     @PreAuthorize("permitAll()")
     public Category getById(@PathVariable int id) {
-        try {
-            var category = categoryDao.getById(id);
+       // try {
+            Category category = categoryDao.getById(id);
 
-            if (category == null)
+            if (category == null) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-
+            }
             // get the category by id
             return category;
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops.......... server error");
-        }
+        /*} catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops.......... server error");*/
+
     }
 
     // the url to return all products in category 1 would look like this
     // https://localhost:8080/categories/1/products
     @GetMapping("{categoryId}/products")
+    @PreAuthorize("permitAll()")
     public List<Product> getProductsById(@PathVariable int categoryId) {
         // get a list of product by categoryId
-        return productDao.listByCategoryId(categoryId);
+
+        try {
+            return productDao.listByCategoryId(categoryId);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops.......... server error");
+        }
+
     }
 
     // add annotation to call this method for a POST action
@@ -82,11 +92,12 @@ public class CategoriesController {
     // add annotation to call this method for a PUT (update) action - the url path must include the categoryId
     // add annotation to ensure that only an ADMIN can call this function
     @PutMapping("{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public void updateCategory(@PathVariable int id, @RequestBody Category category) {
         // update the category by id
         try {
             // bug is here, it should be updateProduct
+            category.setCategoryId(id);
             categoryDao.update(id, category);
         } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... server error.");

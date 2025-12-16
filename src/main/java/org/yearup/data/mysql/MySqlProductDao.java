@@ -60,8 +60,8 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     }
 
     @Override
-    public List<Product> listByCategoryId(int categoryId)
-    {
+    public List<Product> listByCategoryId(int categoryId) {
+
         List<Product> products = new ArrayList<>();
 
         String sql = "SELECT * FROM products " +
@@ -193,7 +193,7 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     {
 
         String sql = "DELETE FROM products " +
-                " WHERE product_id = ?;";
+                " WHERE product_id = ?";
 
         try (Connection connection = getConnection())
         {
