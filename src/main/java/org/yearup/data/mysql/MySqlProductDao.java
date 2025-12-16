@@ -23,14 +23,23 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
     {
         List<Product> products = new ArrayList<>();
 
-        String sql = "SELECT * FROM products " +
+        String sql = """
+                SELECT *
+                FROM products
+                WHERE (? = -1 OR category_id = ?)
+                AND (? = -1 OR price >= ?)
+                AND (? = -1 OR price <= ?)
+                AND (? = '' OR subcategory = ?)
+                """;
+
+       /* String sql = "SELECT * FROM products " +
                 "WHERE (category_id = ? OR ? = -1) " +
                 "   AND (price <= ? OR ? = -1) " +
-                "   AND (subcategory = ? OR ? = '') ";
+                "   AND (subcategory = ? OR ? = '') ";*/
 
         categoryId = categoryId == null ? -1 : categoryId;
-        minPrice = minPrice == null ? new BigDecimal("-1") : minPrice;
-        maxPrice = maxPrice == null ? new BigDecimal("-1") : maxPrice;
+        minPrice = minPrice == null ? BigDecimal.valueOf(-1) : minPrice;
+        maxPrice = maxPrice == null ? BigDecimal.valueOf(1) : maxPrice;
         subCategory = subCategory == null ? "" : subCategory;
 
         try (Connection connection = getConnection())
@@ -38,10 +47,15 @@ public class MySqlProductDao extends MySqlDaoBase implements ProductDao
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, categoryId);
             statement.setInt(2, categoryId);
+
             statement.setBigDecimal(3, minPrice);
             statement.setBigDecimal(4, minPrice);
-            statement.setString(5, subCategory);
-            statement.setString(6, subCategory);
+
+            statement.setBigDecimal(5, maxPrice);
+            statement.setBigDecimal(6, maxPrice);
+
+            statement.setString(7, subCategory);
+            statement.setString(8, subCategory);
 
             ResultSet row = statement.executeQuery();
 

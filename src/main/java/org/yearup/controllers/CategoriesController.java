@@ -33,7 +33,7 @@ public class CategoriesController {
 
 
     // add the appropriate annotation for a get action
-    @GetMapping
+    @GetMapping("")
     public List<Category> getAll() {
         // find and return all categories
         //try {
