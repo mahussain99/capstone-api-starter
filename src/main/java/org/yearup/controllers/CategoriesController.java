@@ -17,8 +17,8 @@ import java.util.List;
 // http://localhost:8080/categories
 // add annotation to allow cross site origin requests
 @RestController
-@RequestMapping("categories")
 @CrossOrigin
+@RequestMapping("categories")
 public class CategoriesController {
 
     private CategoryDao categoryDao;
@@ -33,7 +33,8 @@ public class CategoriesController {
 
 
     // add the appropriate annotation for a get action
-    @GetMapping("")
+    @GetMapping
+    @PreAuthorize("permitAll()")
     public List<Category> getAll() {
         // find and return all categories
         //try {
@@ -92,7 +93,7 @@ public class CategoriesController {
     // add annotation to call this method for a PUT (update) action - the url path must include the categoryId
     // add annotation to ensure that only an ADMIN can call this function
     @PutMapping("{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void updateCategory(@PathVariable int id, @RequestBody Category category) {
         // update the category by id
         try {

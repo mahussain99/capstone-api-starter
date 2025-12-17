@@ -24,7 +24,7 @@ public class ProductsController
         this.productDao = productDao;
     }
 
-    @GetMapping
+    @GetMapping("")
     @PreAuthorize("permitAll()")
     public List<Product> search(@RequestParam(name="cat", required = false) Integer categoryId,
                                 @RequestParam(name="minPrice", required = false) BigDecimal minPrice,
@@ -84,8 +84,8 @@ public class ProductsController
         {
             // bug is here, it should be updateProduct
            // productDao.create(product);
-            product.setProductId(id);
-            productDao.update(id, product);
+           // product.setProductId(id);
+            productDao.update(id, product); // it was created here instead of update.
         }
         catch(Exception ex)
         {
@@ -94,7 +94,7 @@ public class ProductsController
     }
 
     @DeleteMapping("{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteProduct(@PathVariable int id)
     {
