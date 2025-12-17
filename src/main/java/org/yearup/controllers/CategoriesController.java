@@ -33,32 +33,39 @@ public class CategoriesController {
 
 
     // add the appropriate annotation for a get action
-    @GetMapping
+    @GetMapping("")
     @PreAuthorize("permitAll()")
     public List<Category> getAll() {
         // find and return all categories
-        //try {
+        try {
 
             return categoryDao.getAllCategories();
-        /*} catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Ops....server error");
-        }*/
+        } catch (ResponseStatusException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "There is an error.");
+
+        }
     }
+
     // add the appropriate annotation for a get action
     @GetMapping("{id}")
     @PreAuthorize("permitAll()")
     public Category getById(@PathVariable int id) {
-       // try {
-            Category category = categoryDao.getById(id);
+        try {
+            var category = categoryDao.getById(id);
 
-            if (category == null) {
+            if (category == null)
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-            }
+
             // get the category by id
             return category;
-        /*} catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops.......... server error");*/
 
+        } catch (ResponseStatusException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops..... server error.");
+        }
     }
 
     // the url to return all products in category 1 would look like this
@@ -96,25 +103,22 @@ public class CategoriesController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void updateCategory(@PathVariable int id, @RequestBody Category category) {
         // update the category by id
+
         try {
-            // bug is here, it should be updateProduct
-            category.setCategoryId(id);
             categoryDao.update(id, category);
         } catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... server error.");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
         }
-
     }
 
 
     // add annotation to call this method for a DELETE action - the url path must include the categoryId
     // add annotation to ensure that only an ADMIN can call this function
     @DeleteMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCategory(@PathVariable int id) {
         // delete the category by id
-
         try {
             var category = categoryDao.getById(id);
 
@@ -127,3 +131,5 @@ public class CategoriesController {
         }
     }
 }
+
+

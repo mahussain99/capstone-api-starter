@@ -28,13 +28,6 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
                     SELECT *
                     FROM categories
                     """);
-           
-          /*  WHERE (category_id = ? OR ? = -1)
-            AND (name = ? OR ? = '')
-            AND (description = ? OR ? = '')
-
-  categoryId = categoryId == null ? -1 : categoryId;
-   name = name == null ? "" : name;*/
 
             ResultSet resultSet = categoriesStatement.executeQuery();
             while (resultSet.next()) {
@@ -115,7 +108,7 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
                     """);
             updateStatement.setString(1, category.getName());
             updateStatement.setString(2, category.getDescription());
-            updateStatement.setInt(3, category.getCategoryId());
+            updateStatement.setInt(3, categoryId);
 
             int rows = updateStatement.executeUpdate();
             if (rows == 0) {
