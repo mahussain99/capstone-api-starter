@@ -49,9 +49,12 @@ import java.sql.SQLException;
     public void addingItems(int userId, int productId) {
         try {
             Connection connection = getConnection();
-            PreparedStatement addingItemStatement = connection.prepareStatement ""INSERT INTO shopping_cart(user_id, product_id) VALUES (?, ?)
-                    """
-            );
+            PreparedStatement addingItemStatement = connection.prepareStatement (""" 
+                    INSERT INTO shopping_cart (user_id, product_id) VALUES (?, ?)
+                    """);
+            addingItemStatement.setInt(1, userId);
+            addingItemStatement.setInt(2,productId);
+            addingItemStatement.executeUpdate();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
