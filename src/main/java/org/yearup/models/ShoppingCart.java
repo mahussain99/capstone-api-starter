@@ -8,6 +8,9 @@ public class ShoppingCart
 {
     private Map<Integer, ShoppingCartItem> items = new HashMap<>();
 
+    public ShoppingCart(int productId, int quantity) {
+    }
+
     public Map<Integer, ShoppingCartItem> getItems()
     {
         return items;

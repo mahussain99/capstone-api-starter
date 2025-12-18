@@ -47,18 +47,26 @@ import java.sql.SQLException;
 
     @Override
     public void addingItems(int userId, int productId) {
-        try {
-            Connection connection = getConnection();
-            PreparedStatement addingItemStatement = connection.prepareStatement (""" 
-                    INSERT INTO shopping_cart (user_id, product_id) VALUES (?, ?)
-                    """);
-            addingItemStatement.setInt(1, userId);
-            addingItemStatement.setInt(2,productId);
-            addingItemStatement.executeUpdate();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        ShoppingCart existsItem = getByUserId(userId);
 
+        if (existsItem.contains(productId)) {
+            ShoppingCartItem items = existsItem.get(productId);
+            int addQuantity = items.getQuantity() + 1;
+            Update(userId, productId, addQuantity);
+        } else {
+            try {
+                Connection connection = getConnection();
+                PreparedStatement addingItemStatement = connection.prepareStatement(""" 
+                        INSERT INTO shopping_cart (user_id, product_id) VALUES (?, ?)
+                        """);
+                addingItemStatement.setInt(1, userId);
+                addingItemStatement.setInt(2, productId);
+                addingItemStatement.executeUpdate();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+        }
     }
 
     @Override
@@ -94,13 +102,15 @@ import java.sql.SQLException;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
 
-    private ShoppingCart mapRow(ResultSet row) throws SQLException {
+    private ShoppingCartItem mapRow(ResultSet row) throws SQLException {
         int productId = row.getInt("product_id");
         int quantity = row.getInt("quantity");
         
-        return new ShoppingCart(productId,quantity);
+        ShoppingCartItem cartItem = new ShoppingCartItem();
+        Product newProduct = new Product();
+cartItem.setProduct(newProduct);
+        return cartItem;
     }
 }
