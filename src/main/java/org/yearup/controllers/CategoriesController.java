@@ -58,7 +58,6 @@ public class CategoriesController {
         }
     }
 
-    // https://localhost:8080/categories/1/products
     @GetMapping("{categoryId}/products")
     @PreAuthorize("permitAll()")
     public List<Product> getProductsById(@PathVariable int categoryId) {
