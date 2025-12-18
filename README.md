@@ -1,15 +1,14 @@
 # Project Title Grocery Shop
-
 ## Description of the Project
-
-Briefly describe what this Java console application does. Mention its purpose and who the intended users are. Explain the main functionality and what problems it aims to solve.
-
+Java project built with Spring Boot. It’s an online store API where users can register, log in, browse products, and manage their shopping cart. Admins can add, update, or delete products and categories. The project uses secure login with JWT tokens and connects to a MySQL database.
 ## User Stories
 
-List the user stories that guided the development of your application. Format these stories as: "As a [type of user], I want [some goal] so that [some reason]."
-
-- As a user, I want to be able to input my data, so that the application can process it accordingly.
-- As a user, I want to receive immediate feedback, so I can understand what to do next.
+- As a user, I want to view a list of all product categories, So that I can browse products by category.
+- As a user, I want to view details of a specific category, So that I understand what types of products it contains
+- As an administrator, I want to create a new category, So that new types of products can be added to the store
+- As an administrator, I want to update an existing category, So that category information stays accurate
+- As an administrator, I want to delete a category, So that outdated or unused categories are removed
+- As a user, I want to view all products, So that I can browse available items.
 
 ## Setup
 
@@ -32,37 +31,45 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Technologies Used
 
-- Java: Mention the version you are using.
-- Any additional libraries or frameworks used in the project.
+- Java: Java: openjdk 17.0.12 2024-07-16.
+- Tools: IntelliJ IDEA.Workshop, Exercise, ChatGPT and W3School
 
 ## Demo
+![CC.png](image/CC.png)
+![CDAO.png](image/CDAO.png)
+![PC.png](image/PC.png)
+![ProductDAO.png](image/ProductDAO.png)
 
-Include screenshots or GIFs that show your application in action. Use tools like [Giphy Capture](https://giphy.com/apps/giphycapture) to record a GIF of your application.
+![SetUp.png](image/SetUp.png)
+![Phase 1.png](image/Phase%201.png)
+![Phase 2.png](image/Phase%202.png)
+![Phase 3.png](image/Phase%203.png)
 
-![Application Screenshot](path/to/your/screenshot.png)
+![FreshProduce.png](image/FreshProduce.png)
+![Dairy&Eggs.png](image/Dairy%26Eggs.png)
+![FreshProduce.png](image/FreshProduce.png)
+![Natural.png](image/Natural.png)
+![Pantry.png](image/Pantry.png)
 
 ## Future Work
-
-Outline potential future enhancements or functionalities you might consider adding:
-
-- Additional feature to be developed.
-- Improvement of current functionalities.
+- Improve search and filtering with advanced
+- Build a full admin dashboard managing products and categories.
+- Filtering by price
+- Add item in shopping cart
 
 ## Resources
+- W3School.com
+- Workshop, Exercise
+- Potato-Sensei
 
-List resources such as tutorials, articles, or documentation that helped you during the project.
-
-- [Java Programming Tutorial](https://www.example.com)
-- [Effective Java](https://www.example.com)
 
 ## Team Members
 
-- **Name 1** - Specific contributions or roles.
-- **Name 2** - Specific contributions or roles.
+- **Name 1** Mohammad A Hussain
 
 ## Thanks
 
 Express gratitude towards those who provided help, guidance, or resources:
 
-- Thank you to [Mentor's Name] for continuous support and guidance.
-- A special thanks to all teammates for their dedication and teamwork.
+- Thank you to [Nauman and Andy] for continuous support and guidance.
+##### A special thanks to (Raymond)
