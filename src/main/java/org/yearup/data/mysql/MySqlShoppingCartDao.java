@@ -62,12 +62,38 @@ import java.sql.SQLException;
     }
 
     @Override
-    public void Update() {
+    public void Update(int userId, int productId, int quantity) {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement updateStatement = connection.prepareStatement("""
+                  UPDATE shopping_cart SET quantity = ?
+                  WHERE user_id = ? AND product_id = ?
+                  """);
+            updateStatement.setInt(1, userId);
+            updateStatement.setInt(2,productId);
+            updateStatement.setInt(3,quantity);
+            updateStatement.executeUpdate();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
     @Override
-    public void delete() {
+    public void delete(int userId) {
+        try {
+            Connection connection = getConnection();
+            PreparedStatement deleStatement = connection.prepareStatement("""
+                   
+                   DELETE FROM shopping_cart WHERE user_id""");
+            deleStatement.setInt(1,userId);
+            deleStatement.executeUpdate();
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
