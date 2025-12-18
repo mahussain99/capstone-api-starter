@@ -25,6 +25,7 @@ import java.sql.SQLException;
 
     @Override
     public ShoppingCart getByUserId(int userId) {
+        ShoppingCart shoppingCart = new ShoppingCart();
         try (Connection connection = getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement("""
                      SELECT * FROM shopping_cart
@@ -32,8 +33,9 @@ import java.sql.SQLException;
 
             preparedStatement.setInt(1, userId);
             try (ResultSet resultSetId = preparedStatement.executeQuery()) {
-                if (resultSetId.next()) {
-                    return mapRow(resultSetId);
+                while (resultSetId.next()) {
+                    ShoppingCartItem item = mapRow(resultSetId);
+                    shoppingCart.add(item);
 
                 }
             }
@@ -41,7 +43,7 @@ import java.sql.SQLException;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return shoppingCart;
     }
 
 
@@ -77,9 +79,9 @@ import java.sql.SQLException;
                   UPDATE shopping_cart SET quantity = ?
                   WHERE user_id = ? AND product_id = ?
                   """);
-            updateStatement.setInt(1, userId);
-            updateStatement.setInt(2,productId);
-            updateStatement.setInt(3,quantity);
+            updateStatement.setInt(1,quantity);
+            updateStatement.setInt(2,userId);
+            updateStatement.setInt(3,productId);
             updateStatement.executeUpdate();
 
         } catch (Exception e) {
@@ -94,7 +96,7 @@ import java.sql.SQLException;
             Connection connection = getConnection();
             PreparedStatement deleStatement = connection.prepareStatement("""
                    
-                   DELETE FROM shopping_cart WHERE user_id""");
+                   DELETE FROM shopping_cart WHERE user_id = ?""");
             deleStatement.setInt(1,userId);
             deleStatement.executeUpdate();
 
@@ -109,8 +111,9 @@ import java.sql.SQLException;
         int quantity = row.getInt("quantity");
         
         ShoppingCartItem cartItem = new ShoppingCartItem();
-        Product newProduct = new Product();
-cartItem.setProduct(newProduct);
+        Product newProduct = productDao.getById(productId);
+        cartItem.setProduct(newProduct);
+        cartItem.setQuantity(quantity);
         return cartItem;
     }
 }

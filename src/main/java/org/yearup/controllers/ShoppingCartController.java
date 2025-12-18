@@ -104,7 +104,6 @@ public class ShoppingCartController {
     }    // https://localhost:8080/cart
 
     @DeleteMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public ShoppingCart delete(Principal principal) {
         try {
             String userName = principal.getName();
