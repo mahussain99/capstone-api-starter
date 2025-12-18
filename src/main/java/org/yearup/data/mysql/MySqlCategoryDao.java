@@ -41,7 +41,6 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
             throw new RuntimeException(e);
         }
 
-        // get all categories
         return categoryList;
     }
 
@@ -62,8 +61,6 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-        // get category by id
         return null;
     }
 
@@ -99,7 +96,6 @@ public class MySqlCategoryDao extends MySqlDaoBase implements CategoryDao {
 
     @Override
     public void update(int categoryId, Category category) {
-        // update category
         try (Connection connection = getConnection()) {
             PreparedStatement updateStatement = connection.prepareStatement("""
                     
