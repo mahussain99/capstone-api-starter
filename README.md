@@ -31,7 +31,7 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Technologies Used
 
-- Java: Java: openjdk 17.0.12
+- Java: openjdk 17.0.12
 - Tools: IntelliJ IDEA.
 
 ## Demo
@@ -52,9 +52,8 @@ Follow these steps to get your application running within IntelliJ IDEA:
 ![img.png](image/img.png)
 
 ## Future Work
-- Improve search and filtering with advanced
+- Improve search and flexible filtering with minimum, maximum price and so on.
 - Build a full admin dashboard managing products and categories.
-- Filtering by price
 - Add item in shopping cart
 
 ## Resources
