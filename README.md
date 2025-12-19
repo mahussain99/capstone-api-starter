@@ -31,8 +31,8 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Technologies Used
 
-- Java: Java: openjdk 17.0.12 2024-07-16.
-- Tools: IntelliJ IDEA.Workshop, Exercise, ChatGPT and W3School
+- Java: Java: openjdk 17.0.12
+- Tools: IntelliJ IDEA.
 
 ## Demo
 ![CC.png](image/CC.png)
@@ -47,7 +47,6 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ![FreshProduce.png](image/FreshProduce.png)
 ![Dairy&Eggs.png](image/Dairy%26Eggs.png)
-![FreshProduce.png](image/FreshProduce.png)
 ![Natural.png](image/Natural.png)
 ![Pantry.png](image/Pantry.png)
 
@@ -65,7 +64,7 @@ Follow these steps to get your application running within IntelliJ IDEA:
 
 ## Team Members
 
-- **Name 1** Mohammad A Hussain
+- Name: Mohammad A Hussain
 
 ## Thanks
 
