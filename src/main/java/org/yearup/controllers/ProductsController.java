@@ -68,7 +68,7 @@ public class ProductsController {
         try {
             // bug is here, it should be updateProduct
             // it was productDao.create(product);
-            productDao.update(id, product); // it was created here instead of update.
+            productDao.update(id, product);
         } catch (Exception ex) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Oops... our bad.");
         }

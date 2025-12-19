@@ -49,6 +49,7 @@ Follow these steps to get your application running within IntelliJ IDEA:
 ![Dairy&Eggs.png](image/Dairy%26Eggs.png)
 ![Natural.png](image/Natural.png)
 ![Pantry.png](image/Pantry.png)
+![img.png](image/img.png)
 
 ## Future Work
 - Improve search and filtering with advanced
